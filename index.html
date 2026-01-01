@@ -117,7 +117,7 @@
                 merchantId: "default", merchantName: "로컬링크 파트너", themeType: "general", marketerName: "",
                 marketerRecipient: "", password: "1234",
                 deliveryType: "owner",
-                stdPrice: 120000, prePrice: 200000, stdReward: 25000, preReward: 49000,
+                stdPrice: 120000, prePrice: 200000, stdReward: 25000, preReward: 50000, // 49000 -> 50000 수정
                 stdOptions: "사회 초년생, 신혼부부, 자녀양육, 은퇴준비",
                 preOptions: "법인 대표, 개인사업자, 전문직, 자산가",
                 stdQuestions: "월 고정 금융 비용 최적화 지표평가|생애 주기별 유동성 확보 데이터 평가|리스크 비용 & 비상 상황 대비 자산 완충 지수 평가|세무 비용 및 건강보험료 가계 부담 최적화 지표 데이터 평가",
@@ -125,7 +125,7 @@
                 heroTitle: "우리 사장님이 직접 드리는 데이터 보상",
                 heroSubText: "내방 고객을 위한 데이터 보상 혜택 시스템! 고객님의 라이프 지표를 데이터로 공급하고 리워드 포인트를 받으세요.",
                 heroTitleMedical: "우리 원장님이 준비한 데이터 보상 시스템",
-                heroSubTextMedical: "로컬링크 파트너 내방 고객을 위해 기다리시는 동안 데이터 보상 혜택 시스템! 고객님의 라이프 지표를 데이터로 공급하고 최대 4.9만 포인트 리워드로 받으세요.",
+                heroSubTextMedical: "로컬링크 파트너 내방 고객을 위해 기다리시는 동안 데이터 보상 혜택 시스템! 고객님의 라이프 지표를 데이터로 공급하고 최대 5만 포인트 리워드로 받으세요.", // 4.9만 -> 5만 수정
                 medicalThanks: "고객님의 소중한 데이터도 정당한 자산이 되어야 합니다. “원장님인” 제가 보증하는 로컬링크의 투명한 분석을 통해 본인 데이터 자산의 가치를 발견하시길 바랍니다. 지역 사회의 데이터 주권 보호를 위해 함께해주셔서 감사합니다.",
                 generalThanks: "고객님의 소중한 데이터도 정당한 자산이 되어야 합니다. 사장인 제가 보증하는 로컬링크의 투명한 분석을 통해서 전문가를 통한 본인데이터 자산의 가치를 발견하고, 새로운 자산의 가치를 창출하시길 바랍니다.",
                 thirdPartyRecipient: "로컬링크 제휴 분석 전문가(보험설계사, 재무설계사, 경영지도사, 세무전문가, 법률전문가 등)",
@@ -313,7 +313,7 @@
             };
 
             const displayTitle = config.themeType === 'medical' ? (config.heroTitleMedical || "우리 원장님이 준비한 데이터 보상 시스템") : (config.heroTitle || "우리 사장님이 직접 드리는 데이터 보상");
-            const displaySubText = config.themeType === 'medical' ? (config.heroSubTextMedical || "로컬링크 파트너 내방 고객을 위해 기다리시는 동안 데이터 보상 혜택 시스템! 고객님의 라이프 지표를 데이터로 공급하고 최대 4.9만 포인트 리워드로 받으세요.") : config.heroSubText;
+            const displaySubText = config.themeType === 'medical' ? (config.heroSubTextMedical || "로컬링크 파트너 내방 고객을 위해 기다리시는 동안 데이터 보상 혜택 시스템! 고객님의 라이프 지표를 데이터로 공급하고 최대 5만 포인트 리워드로 받으세요.") : config.heroSubText;
 
             return (
                 <div className="min-h-screen flex flex-col items-center overflow-x-hidden relative">
@@ -336,6 +336,16 @@
                                                     </p>
                                                 </div>
                                             )}
+                                            <div className="grid grid-cols-2 gap-3 mt-6">
+                                                <div className="bg-white p-4 rounded-2xl shadow-sm border border-slate-100 text-center">
+                                                    <p className="text-[9px] font-black text-slate-400 uppercase mb-1">참여율</p>
+                                                    <p className="text-xl font-black">96.8%</p>
+                                                </div>
+                                                <div className="bg-white p-4 rounded-2xl shadow-sm border border-slate-100 text-center">
+                                                    <p className="text-[9px] font-black text-slate-400 uppercase mb-1">최대 보상</p>
+                                                    <p className={`text-xl font-black ${theme.text}`}>5만 포인트</p>
+                                                </div>
+                                            </div>
                                         </div>
                                         <div className="p-6 space-y-4">
                                             <button onClick={() => { setTier('standard'); setStep(1); }} className="w-full p-6 bg-white border-2 border-slate-100 rounded-3xl text-left transition-all active:scale-95 shadow-sm hover:border-indigo-500 relative overflow-hidden group">
@@ -359,7 +369,7 @@
                                                 </div>
                                                 <h3 className="text-lg font-black mb-1 text-white italic">기업경영 전략 인덱스 보상</h3>
                                                 <div className="flex justify-between items-end">
-                                                    <div><span className={`text-xl font-black text-teal-400`}>4.9만 포인트</span><p className="text-[9px] font-bold text-teal-400/60 mt-1">※ 대면 실검증 시 제공</p></div>
+                                                    <div><span className={`text-xl font-black text-teal-400`}>5만 포인트</span><p className="text-[9px] font-bold text-teal-400/60 mt-1">※ 대면 실검증 시 제공</p></div>
                                                     <div className="flex flex-col items-center">
                                                         <Icon name="hand-tap" size={24} className="text-teal-400 mb-1" />
                                                         <Icon name="chevron-right" className="text-white/20" />
@@ -419,7 +429,7 @@
                                 {step === 3 && (
                                     <div className="flex-1 flex flex-col items-center justify-center p-8 text-center animate-fade-in">
                                         <div className={`w-24 h-24 ${theme.light} ${theme.text} rounded-full flex items-center justify-center mb-10 shadow-inner`}><Icon name="clipboard-check" size={48} /></div>
-                                        <h2 className="text-3xl font-black mb-6 italic uppercase tracking-tighter underline decoration-indigo-500 decoration-8 break-keep">데이터 매매 신청이 완료되었습니다.</h2>
+                                        <h2 className="text-2xl font-black mb-6 italic uppercase tracking-tighter underline decoration-indigo-500 decoration-8 break-keep">데이터 매매 신청이 완료되었습니다.</h2>
                                         <p className="text-slate-600 font-bold mb-10 break-keep italic leading-relaxed">
                                             {config.deliveryType === 'direct' 
                                                 ? "배정된 분석 전문가와의 대면 검증후 플랫폼에서 약속된 보상을 직접 전송해 드립니다."
@@ -438,6 +448,7 @@
                             </div>
                         </div>
                     ) : (
+                        // --- [관리자 대시보드] ---
                         <div className="w-full max-w-7xl bg-slate-50 min-h-screen p-6 flex flex-col items-center">
                             {adminType ? (
                                 <div className="w-full animate-fade-in">
