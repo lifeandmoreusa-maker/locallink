@@ -68,7 +68,7 @@
                 "send": <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>,
                 "shield": <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/><path d="m9 12 2 2 4-4"/></svg>,
                 "user": <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>,
-                "lock": <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="18" height="11" x="3" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>,
+                "lock": <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>,
                 "alert-circle": <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>,
                 "share": <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>,
                 "clipboard-check": <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="m9 14 2 2 4-4"/></svg>,
@@ -91,7 +91,7 @@
             storageBucket: "locallink-bsr.firebasestorage.app",
             messagingSenderId: "216243154188",
             appId: "1:216243154188:web:1b818b093f40c177706d29",
-            measurementId: "G-XB7LN5Z91P"
+            measurementId: "G-TDS9MCRX70"
         };
 
         function App() {
@@ -158,6 +158,7 @@
                     const db = getFirestore(app);
                     window.db = db;
                     await signInAnonymously(auth);
+                    
                     const params = new URLSearchParams(window.location.search);
                     const mid = params.get('id');
                     if (mid) {
@@ -390,6 +391,9 @@
                                     <div className="p-8 animate-fade-in overflow-y-auto pb-20">
                                         <button onClick={() => setStep(1)} className="mb-6 text-slate-400 flex items-center gap-1 font-bold text-xs"><Icon name="arrow-left" size={14}/> 이전으로</button>
                                         <h2 className="text-2xl font-black text-slate-900 mb-8 italic uppercase tracking-tighter underline decoration-emerald-500 decoration-4">Contract</h2>
+                                        {/* 요청 텍스트 추가 */}
+                                        <p className="text-slate-500 text-[13px] font-bold mb-8 ml-0.5">정확한 데이터 가치 산정을 위해 정보를 입력해 주세요.</p>
+                                        
                                         <div className="space-y-4 mb-8">
                                             <input type="text" placeholder="성함" className="w-full p-4 bg-slate-50 rounded-xl font-bold outline-none border-2 border-transparent focus:border-indigo-500" value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} />
                                             <div className="grid grid-cols-2 gap-3"><input type="text" placeholder="생년월일 (6자리)" className="w-full p-4 bg-slate-50 rounded-xl font-bold outline-none border-2 border-transparent focus:border-indigo-500" value={formData.birth} onChange={e => setFormData({...formData, birth: e.target.value})} /><input type="tel" placeholder="연락처 (-제외)" className="w-full p-4 bg-slate-50 rounded-xl font-bold outline-none border-2 border-transparent focus:border-indigo-500" value={formData.phone} onChange={e => setFormData({...formData, phone: e.target.value})} /></div>
@@ -421,6 +425,7 @@
                                     </div>
                                 )}
                             </div>
+
                             <div className="p-4 bg-slate-50 border-t border-slate-100 flex justify-center">
                                 <button onClick={() => setView('admin')} className="text-[10px] font-black text-slate-300 uppercase tracking-widest flex items-center gap-1.5 hover:text-indigo-400 transition-colors">
                                     <Icon name="lock" size={10} /> 관리자 모드 진입
@@ -428,6 +433,7 @@
                             </div>
                         </div>
                     ) : (
+                        // --- [관리자 대시보드] ---
                         <div className="w-full max-w-7xl bg-slate-50 min-h-screen p-6 flex flex-col items-center">
                             {adminType ? (
                                 <div className="w-full animate-fade-in">
@@ -445,7 +451,6 @@
 
                                     {activeTab === 'list' ? (
                                         <div className="space-y-4 animate-fade-in">
-                                            {/* 필터 영역 (매장 ID 옆 영업자 필터 추가) */}
                                             <div className="bg-white rounded-3xl p-6 shadow-sm border border-slate-100 flex flex-wrap gap-6 items-end justify-between"><div className="flex flex-wrap gap-4 items-end">
                                                     {adminType === 'master' && (
                                                         <>
